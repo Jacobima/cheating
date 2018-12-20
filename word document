@@ -1,0 +1,26 @@
+HttpRequest* httpRequest=new HttpRequest();
+httpRequest->setUrl("(some domain .com)");
+httpRequest->setRequestType(HttpRequest::Type::POST);
+httpRequest->setRequestData("(something like name=?&age=30&...)");
+httpRequest->setResponseCallback([=](HttpClient* client, HttpResponse* response){
+    string responseString=response->getResponseDataString();
+        if(response->getErrorCode()!=200){
+            if(response->getErrorCode()==404){
+                Alert* alert=new Alert();
+                alert->setFontSize(30);
+                alert->setFontColor(255,255,255);
+                alert->setPosition(Screen.MIDDLE);
+                alert->show("Connection Error","Not Found");
+            }else if((some other different cases)){
+                (some other alert)
+            }else
+                Alert* alert=new Alert();
+                alert->setFontSize(30);
+                alert->setPosition(Screen.MIDDLE);
+                alert->setFontColor(255,255,255);
+                alert->show("Connection Error","unknown error");
+            }
+        }else{
+            (other handle methods depend on different URL)
+        }
+}
